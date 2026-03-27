@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 173 58% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 92%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 173 58% 39%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 173 58% 39%;
+    --radius: 0.625rem;
+
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 220 14% 80%;
+    --sidebar-primary: 173 58% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 40% 16%;
+    --sidebar-accent-foreground: 220 14% 90%;
+    --sidebar-border: 222 40% 18%;
+    --sidebar-ring: 173 58% 39%;
+    --sidebar-muted: 220 9% 46%;
+
+    --lead-color: 38 92% 50%;
+    --client-color: 173 58% 39%;
+    --status-new: 217 91% 60%;
+    --status-contact: 38 92% 50%;
+    --status-negotiation: 280 67% 54%;
+    --status-lost: 0 72% 51%;
+    --status-converted: 142 71% 45%;
+
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.06), 0 2px 4px -2px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.08), 0 4px 6px -4px hsl(0 0% 0% / 0.06);
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 220 14% 92%;
+    --card: 222 47% 11%;
+    --card-foreground: 220 14% 92%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 14% 92%;
+    --primary: 173 58% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 40% 16%;
+    --secondary-foreground: 220 14% 92%;
+    --muted: 222 40% 14%;
+    --muted-foreground: 220 9% 56%;
+    --accent: 173 58% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 40% 18%;
+    --input: 222 40% 18%;
+    --ring: 173 58% 45%;
+
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 220 14% 70%;
+    --sidebar-primary: 173 58% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 40% 12%;
+    --sidebar-accent-foreground: 220 14% 85%;
+    --sidebar-border: 222 40% 14%;
+    --sidebar-ring: 173 58% 45%;
+    --sidebar-muted: 220 9% 46%;
+
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -4px hsl(0 0% 0% / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
+  }
+}
+
+/* ─── Leaflet Custom Styles ───────────────────────────── */
+
+.leaflet-marker-custom {
+  background: none !important;
+  border: none !important;
+}
+
+/* Cluster icons */
+.leaflet-marker-cluster-custom {
+  background: none !important;
+  border: none !important;
+}
+
+.leaflet-cluster-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-cluster-icon.cluster-small {
+  background: radial-gradient(circle, hsl(173 58% 45%), hsl(173 58% 35%));
+  box-shadow: 0 0 0 6px hsl(173 58% 45% / 0.25), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-cluster-icon.cluster-medium {
+  background: radial-gradient(circle, hsl(38 92% 50%), hsl(38 82% 40%));
+  box-shadow: 0 0 0 6px hsl(38 92% 50% / 0.25), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-cluster-icon.cluster-large {
+  background: radial-gradient(circle, hsl(0 72% 51%), hsl(0 62% 40%));
+  box-shadow: 0 0 0 8px hsl(0 72% 51% / 0.25), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Popup styles */
+.crm-popup-container .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  padding: 0;
+}
+
+.crm-popup-container .leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.crm-popup-container .leaflet-popup-tip {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crm-popup {
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+.crm-popup .popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.crm-popup .popup-header strong {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.crm-popup .popup-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.crm-popup .popup-badge-lead {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.crm-popup .popup-badge-client {
+  background: #ccfbf1;
+  color: #115e59;
+}
+
+.crm-popup .popup-row {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.crm-popup .popup-status {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.crm-popup .popup-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.crm-popup .popup-btn {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.crm-popup .popup-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Dark mode leaflet overrides */
+.dark .leaflet-tile-pane {
+  filter: brightness(0.85) contrast(1.1) saturate(0.9);
+}
+
+.dark .crm-popup-container .leaflet-popup-content-wrapper {
+  background: hsl(222 47% 11%);
+  color: #e2e8f0;
+}
+
+.dark .crm-popup-container .leaflet-popup-tip {
+  background: hsl(222 47% 11%);
+}
+
+.dark .crm-popup .popup-header strong {
+  color: #f1f5f9;
+}
+
+.dark .crm-popup .popup-badge-lead {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.dark .crm-popup .popup-badge-client {
+  background: rgba(45, 212, 191, 0.2);
+  color: #5eead4;
+}
+
+.dark .crm-popup .popup-row {
+  color: #94a3b8;
+}
+
+.dark .crm-popup .popup-status {
+  background: hsl(222 40% 16%);
+  color: #94a3b8;
+}
+
+.dark .crm-popup .popup-actions {
+  border-top-color: hsl(222 40% 18%);
+}
+
+.dark .crm-popup .popup-btn {
+  background: hsl(222 40% 16%);
+  border-color: hsl(222 40% 22%);
+  color: #cbd5e1;
+}
+
+.dark .crm-popup .popup-btn:hover {
+  background: hsl(222 40% 20%);
+  border-color: hsl(222 40% 28%);
+}
